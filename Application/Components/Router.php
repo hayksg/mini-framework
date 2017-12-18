@@ -1,5 +1,7 @@
 <?php
 
+namespace Application\Components;
+
 class Router 
 {
     const ROUTES_PATH = ROOT . 'config/routes.php';
@@ -19,13 +21,15 @@ class Router
 
     public function run()
     {
+        $marker = 0;
+        
         // Get uri
         $uri = $this->getURI();
         
         foreach ($this->routes as $uriPattern => $path) {
             
             // Check is request exists in routes.php
-            $pattern = "~^$uriPattern(?![\w\s])~";
+            $pattern = "~^$uriPattern(?![\w\s])$~";
             
             if (preg_match($pattern, $uri)) {
                 // If exists parameters get them
@@ -33,7 +37,7 @@ class Router
   
                 // If exists get Controller name and action name
                 $segments = explode('/', $internalRoute);
-                $controllerName = ucfirst(array_shift($segments)) . 'Controller';
+                $controllerName = 'Application\Controller\\' . ucfirst(array_shift($segments)) . 'Controller';
                 $actionName = array_shift($segments) . 'Action';
                 $parameters = $segments;
                         
@@ -51,11 +55,16 @@ class Router
                         $result = call_user_func_array([$controllerObject, $actionName], $parameters);
                 
                          if ($result != null) {
+                            $marker = 1;
                             break;
                         }
                     }
                 }
-            }
+            } 
         } 
+        
+        if ($marker != 1) {
+            throw new \Exception('Page not found');
+        }
     }
 }

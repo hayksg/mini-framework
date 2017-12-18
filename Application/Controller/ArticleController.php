@@ -1,17 +1,32 @@
 <?php
 
+namespace Application\Controller;
+
+use Application\Model\Article;
+use Application\Components\View;
+
 class ArticleController 
 {
     public function indexAction()
     {
-        echo __METHOD__;
+        $articles = Article::getAll();
+        
+        $view = new View([
+            'articles' => $articles,
+        ]);
+        $view->display('article/index');
         
         return true;
     }
     
-    public function viewAction()
+    public function viewAction($id)
     {
-        echo __METHOD__;
+        $article = Article::getById((int)$id);
+        
+        $view = new View([
+            'article' => $article,
+        ]);
+        $view->display('article/view');
         
         return true;
     }

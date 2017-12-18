@@ -1,5 +1,8 @@
 <?php
 
+use Application\Components\Router;
+use Application\Components\FunctionsLibrary;
+
 // Front controller
 
 // Settings
@@ -8,7 +11,10 @@ error_reporting(E_ALL);
 
 // Including files
 define('ROOT', __DIR__ . '/../');
-require_once(ROOT . 'Application/Components/Router.php');
+require_once(ROOT . 'config/autoload.php');
+
+// Catch all Exceptions
+set_exception_handler([new FunctionsLibrary, 'catchAllExceptions']);
 
 // Router's invoke
 (new Router())->run();

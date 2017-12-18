@@ -1,5 +1,7 @@
 <?php
 
+namespace Application\Controller;
+
 class NewsController 
 {
     public function indexAction()
