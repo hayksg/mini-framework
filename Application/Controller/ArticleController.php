@@ -4,8 +4,9 @@ namespace Application\Controller;
 
 use Application\Model\Article;
 use Application\Components\View;
+use Application\Components\AbstractController;
 
-class ArticleController 
+class ArticleController extends AbstractController
 {
     public function indexAction()
     {
@@ -14,7 +15,9 @@ class ArticleController
         $view = new View([
             'articles' => $articles,
         ]);
-        $view->display('article/index');
+        $view->setTemplate('article/index');
+        $view->setHeadTitle('Articles');
+        $view->ready();
         
         return true;
     }
@@ -26,8 +29,12 @@ class ArticleController
         $view = new View([
             'article' => $article,
         ]);
-        $view->display('article/view');
         
+        $view->setTemplate('article/view');
+        $view->setlayout('indexLayoutSecond');
+        $view->setHeadTitle('Article');
+        $view->ready();
+       
         return true;
     }
 }

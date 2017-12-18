@@ -2,7 +2,9 @@
 
 namespace Application\Controller;
 
-class NewsController 
+use Application\Components\AbstractController;
+
+class NewsController extends AbstractController
 {
     public function indexAction()
     {
