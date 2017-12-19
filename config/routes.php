@@ -7,6 +7,9 @@ return [
     'article/add' => 'article/add', // addAction in ArticleController
     'articles'    => 'article/index', // indexAction in ArticleController
     
+    'manage-articles'    => 'adminarticle/index', // indexAction in AdminArticleController
+    'admin'    => 'admin/index', // indexAction in AdminController
+    
     'news/list/([a-z]+)/([0-9]+)' => 'news/list/$1/$2',  // listAction in NewsController
     'news' => 'news/index', // indexAction in NewsController
 ];
