@@ -5,6 +5,8 @@ namespace Application\Components;
 abstract class BaseModel 
 {
     private static $table;
+    private $data = [];
+    private $dataForUpdate = [];
     
     public static function getAll()
     {

@@ -2,7 +2,7 @@
 
 return [
     'host' => 'localhost',
-    'name' => 'site',
+    'name' => 'mini_framework',
     'user' => 'root',
     'pass' => 'root',
 ];

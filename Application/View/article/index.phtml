@@ -1,9 +1,21 @@
 <div>
     <?php foreach ($articles as $article) : ?>
-    <div>
-        <h3><?= $article->title; ?></h3>
-        <div><?= $this->clearStr($article->short_content); ?></div>
-        <div><a href="/article/view/<?= $article->id ?>">Read more &Gt;</a></div>
+    <div class="card">
+        <div class="card-header">
+            <img class="app-block-image float-left"
+                 src="<?= $this->clearStr($article->image); ?>" 
+                 alt="<?= $this->clearStr($article->title); ?>"
+             >
+            <h4><?= $article->title; ?></h4>
+        </div>
+
+        <div class="card-body">
+            <div><?= $this->clearStr($article->short_content); ?></div>
+        </div>
+
+        <div class="card-footer">
+            <div><a href="/article/view/<?= $article->id ?>" class="card-link">Read more &Gt;</a></div>
+        </div>
     </div>
     <br>
     <br>

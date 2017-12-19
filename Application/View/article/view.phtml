@@ -1,5 +1,18 @@
-<div>
-    <h3><?= $article->title; ?></h3>
-    <div><?= $article->content; ?></div>
-    <div><a href="/articles">&Lt; Back</a></div>
+<div class="card">
+    <div class="card-header">
+        <img class="app-block-image float-left"
+             src="<?= $this->clearStr($article->image); ?>" 
+             alt="<?= $this->clearStr($article->title); ?>"
+        >
+        <h4><?= $article->title; ?></h4>
+    </div>
+    
+    <div class="card-body">
+        <?= $article->content; ?>
+    </div>
+    
+    <div class="card-footer">
+        <a href="/articles" class="card-link">&Lt; Back</a>
+    </div>
+
 </div>

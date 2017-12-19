@@ -2,15 +2,7 @@
 
 namespace Application\Components;
 
-class AbstractView 
+abstract class AbstractView extends AbstractCleaner
 {
-    public function clearStr($str = '')
-    {
-        return trim(htmlentities($str, ENT_QUOTES));
-    }
     
-    public function clearInt($int)
-    {
-        return abs((int)$int);
-    }
 }

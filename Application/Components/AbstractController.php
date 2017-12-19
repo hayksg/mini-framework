@@ -2,8 +2,9 @@
 
 namespace Application\Components;
 
-class AbstractController 
+abstract class AbstractController extends AbstractCleaner
 {
+    
     public static function redirectTo($location = false)
     {
         if ($location) {

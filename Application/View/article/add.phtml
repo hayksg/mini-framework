@@ -1,0 +1,23 @@
+<div>
+    <h4><?= $this->clearStr($this->getHeadTitle()); ?></h4>
+    
+    <form action="/article/add" method="post" name="add-article-form">
+        <div>
+            <label>Title:            
+                <input type="text" name="title">
+            </label>
+        </div>
+        <div>
+            <label>Short content:            
+                <textarea name="short_content"></textarea>
+            </label>
+        </div>
+        <div>
+            <label>Content:            
+                <textarea name="content"></textarea>
+            </label>
+        </div>
+        <input type="submit" value="Submit" name="add_article">
+    </form>
+    
+</div>

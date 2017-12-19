@@ -4,14 +4,29 @@
         <meta charset="utf-8">
         <title><?= $this->getHeadTitle() ?></title>
         <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="/js/popper.min.js"></script>
     </head>
     <body>
-        <header><h1>Second layout</h1></header>
+        
+        <div class="container">
+            <header><h1>Second layout</h1></header>
+        </div>
+        
             
-        <?php $this->template() ?>
+        
+        <div class="container">
+            <?php $this->template() ?>
+        </div>
         
         
-        
-        <footer><h2>Footer</h2></footer>
+        <footer class="footer">
+            <hr>
+            <div class="container">
+                <h4>Footer</h4>
+            </div>
+        </footer>
     </body>
 </html>
