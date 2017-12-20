@@ -1,4 +1,41 @@
-<div>
-    <h5><?= $this->clearStr($this->getHeadTitle()) ?></h5>
-    
+<div class="row">
+    <div class="col-sm-6">
+        <h5><?= $this->clearStr($this->getHeadTitle()) ?></h5>
+    </div>
+    <div class="col-sm-6">
+        <div class="float-right">
+            <a href="/manage-articles/add" class="btn btn-default">Add article</a>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>Title</th>
+                    <th>Short content</th>
+                    <th>Content</th>
+                    <th>Image</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+                <?php foreach ($articles as $article) : ?>
+                <tr>
+                    <td><?= $this->clearStr($article->title) ?></td>
+                    <td><?= $this->clearStr($article->short_content) ?></td>
+                    <td><?= $this->clearStr($article->content) ?></td>
+                    <td><?= $this->clearStr($article->image) ?></td>
+                    <td><?= $this->clearStr($article->datetime) ?></td>
+                    <td>
+                        <a href="/manage-articles/edit/<?= $this->clearInt($article->id) ?>">Edit</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="/manage-articles/delete/<?= $this->clearInt($article->id) ?>">Delete</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
 </div>
