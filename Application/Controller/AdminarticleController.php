@@ -31,17 +31,14 @@ class AdminarticleController extends AbstractController
                 $tmp_name = $files["file"]["tmp_name"];
 
                 // basename() may prevent filesystem traversal attacks;
-
                 $name = $this->clearStr(basename($files["file"]["name"]));
 
                 $uniqueId = uniqid();
                 $name = $uniqueId . $name;
 
-//                if (move_uploaded_file($tmp_name, "$uploads_dir/$name")) {
-//                    return $name;
-//                } 
-                
-                return '/img/home/' . $name;
+                if (move_uploaded_file($tmp_name, "$uploads_dir/$name")) {
+                    return '/img/home/' . $name;
+                } 
             }
         }
     }
@@ -50,31 +47,21 @@ class AdminarticleController extends AbstractController
     {  
         if (isset($_POST['add_article'])) {
             
-            $title        = $this->clearStr($_POST['title']);
-            $shortContent = $this->clearStr($_POST['short_content']);
-            $content      = $this->clearStr($_POST['content']);
-            $image     = $this->clearStr($this->uploadFile($_FILES));
-            
-            /*
+            $title         = $this->clearStr($_POST['title']);
+            $short_content = $this->clearStr($_POST['short_content']);
+            $content       = $this->clearStr($_POST['content']);
+            $image         = $this->clearStr($this->uploadFile($_FILES));
+
             $article = new Article();
-            $article->title        = $title;
-            $article->shortContent = $shortContent;
-            $article->content      = $content;
-            $article->image        = $image;
-            */
+           
+            $article->title         = $title;
+            $article->short_content = $short_content;
+            $article->content       = $content;
+            $article->image         = $image;
             
+            $article->save();
             
-            
-            
-            // Do not forget to open move_uploaded_file 
-            
-            var_dump($title, $shortContent, $content, $image);
-            
-            
-
-            
-
-            
+            $this->redirectTo('/manage-articles');
         }
         
         $view = new View();

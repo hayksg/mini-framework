@@ -5,6 +5,12 @@ namespace Application\Components;
 class DB 
 {
     const DB_CONFIG_PATH = ROOT . 'config/db_params.php';
+    public static $className;
+    
+    public static function setClassName($className)
+    {
+        self::$className = $className;
+    }
     
     public static function getConnection()
     {
@@ -21,5 +27,26 @@ class DB
             echo 'Database error';
             exit;
         }
+    }
+    
+    public static function query($sql, $params = [])
+    {
+        $className = self::$className;
+        $db = DB::getConnection();
+        
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
+        
+        $res = $stmt->fetchAll(\PDO::FETCH_CLASS, $className);
+        
+        return $res ?: false;
+    }
+    
+    public static function persist($sql, $params)
+    {
+        $db = DB::getConnection();
+
+        $stmt = $db->prepare($sql);
+        return $stmt->execute($params) ?: false;
     }
 }

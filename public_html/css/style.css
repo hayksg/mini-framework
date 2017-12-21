@@ -40,3 +40,19 @@ label.asterisk::after {
     margin-left: 5px;
     color: #d00;
 }
+
+/* Block for file input */
+
+.custom-file-control:lang(en)::after {
+  content: "Select image...";
+}
+
+.custom-file-control:lang(en)::before {
+  content: "Browse";
+}
+
+.custom-file-control.selected:lang(en)::after {
+  content: "" !important;
+}
+
+/* End block */
