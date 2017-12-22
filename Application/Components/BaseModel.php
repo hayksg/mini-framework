@@ -6,8 +6,6 @@ abstract class BaseModel
 {
     private static $table;
     private $data = [];
-    private $dataForUpdate = [];
-    
     
     public function __set($name, $value)
     {
@@ -28,15 +26,6 @@ abstract class BaseModel
         $row = $result->fetch();
         if ($row) {
             return $row['Column_name'];
-        }
-    }
-    
-    public function fieldsForUpdate(array $fields)
-    {
-        foreach ($this->data as $key => $value) {
-            if (in_array($key, $fields)) {
-                $this->dataForUpdate[$key] = $fields;
-            }
         }
     }
     
@@ -98,7 +87,28 @@ abstract class BaseModel
     
     private function update()
     {
-        
+        $primaryKeyName = self::getPrimaryKeyName();
+
+        $params = [];
+        $newData = [];
+
+        foreach ($this->data as $key => $value) {
+            if ($key == $primaryKeyName) {
+                $params[':' . $key] = $value;
+            }
+
+            $params[':' . $key] = $value;
+            $newData[] = $key . ' = :' . $key;
+        }
+
+        $sql  = "UPDATE ";
+        $sql .= static::$table;
+        $sql .= " SET ";
+        $sql .= implode(', ', $newData);
+        $sql .= " WHERE ";
+        $sql .= $primaryKeyName . ' = :' . $primaryKeyName;
+
+        return DB::persist($sql, $params);
     }
     
     public function save()
@@ -108,5 +118,17 @@ abstract class BaseModel
         } else {
             return $this->add();
         }
+    }
+    
+    public static function delete($id)
+    {
+        $primaryKeyName = self::getPrimaryKeyName();
+
+        $sql  = "DELETE FROM ";
+        $sql .= static::$table;
+        $sql .= " WHERE ";
+        $sql .= $primaryKeyName . ' = :' . $primaryKeyName;
+
+        return DB::persist($sql, [$primaryKeyName => $id]);
     }
 }
